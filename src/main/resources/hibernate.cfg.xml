@@ -13,7 +13,7 @@
     <property name="format_sql">true</property>
     <property name="hibernate.hbm2ddl.auto">update</property>
 
-<!--    <mapping class="spacetravel.entity.Client"/>-->
+    <mapping class="urlshorter.link.Link"/>
 <!--    <mapping class="spacetravel.entity.Planet"/>-->
 <!--    <mapping class="spacetravel.entity.Ticket"/>-->
 

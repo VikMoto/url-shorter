@@ -4,24 +4,34 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
+import urlshorter.link.Link;
+import urlshorter.link.LinkService;
+import urlshorter.serviceprovider.ServiceProvider;
 
 import java.io.IOException;
 import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
-public class IndexCommand implements Command{
+public class ListCommand implements Command{
     @Override
     public void process(HttpServletRequest req, HttpServletResponse resp, TemplateEngine engine) throws IOException {
-//        resp.getWriter().write("Success");
         resp.setContentType("text/html");
+        LinkService linkService = ServiceProvider.get(LinkService.class);
+
+        Link link = Link.builder()
+                .shortLink("f4h4F")
+                .link("https://google.com")
+                .build();
+        linkService.save(link);
 
         Context simpleContext = new Context(
                 req.getLocale(),
 //                Map.of("name", "Some Name")
-                Collections.emptyMap()
+                Collections.singletonMap("links", linkService.listAll())
         );
-        engine.process("index", simpleContext, resp.getWriter());
+
+
+
+        engine.process("list", simpleContext, resp.getWriter());
         resp.getWriter().close();
     }
 }

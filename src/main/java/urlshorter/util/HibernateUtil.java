@@ -9,12 +9,17 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.tool.hbm2ddl.SchemaExport;
 import org.hibernate.tool.schema.TargetType;
 import org.hibernate.type.SqlTypes;
+import urlshorter.link.Link;
 
 
 import java.util.EnumSet;
 
 @UtilityClass
 public class HibernateUtil {
+
+
+
+
     public static SessionFactory buildSessionFactory() {
         Configuration configuration = buildConfiguration();
         configuration.configure();
@@ -25,7 +30,7 @@ public class HibernateUtil {
         MetadataSources metadataSources = new MetadataSources(new StandardServiceRegistryBuilder()
                 .applySettings(configuration.getProperties())
                 .build());
-//        metadataSources.addAnnotatedClass(Client.class);
+        metadataSources.addAnnotatedClass(Link.class);
 //        metadataSources.addAnnotatedClass(Planet.class);
 //        metadataSources.addAnnotatedClass(Ticket.class);
         metadataSources.addAnnotatedClass(SqlTypes.class);

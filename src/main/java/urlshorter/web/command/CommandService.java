@@ -14,6 +14,7 @@ public class CommandService {
     public CommandService() {
         this.commands = new HashMap<>();
         this.commands.put("GET /", new IndexCommand());
+        this.commands.put("GET /list", new ListCommand());
     }
 
     public void process(HttpServletRequest req, HttpServletResponse resp, TemplateEngine engine) throws IOException {
