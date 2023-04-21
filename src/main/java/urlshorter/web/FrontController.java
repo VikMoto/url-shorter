@@ -46,28 +46,6 @@ public class FrontController extends HttpServlet {
         commandService = new CommandService();
     }
 
-//    @Override
-//    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//       resp.getWriter().write("Success");
-//
-//        Map<String, String[]> parameterMap = req.getParameterMap();
-//
-//        Map<String, Object> params = new LinkedHashMap<>();
-//        for (Map.Entry<String, String[]> keyValue : parameterMap.entrySet()) {
-//            params.put(keyValue.getKey(), keyValue.getValue()[0]);
-//        }
-//
-//        Context simpleContext = new Context(
-//                req.getLocale(),
-////                Map.of("name", "Some Name")
-//                Map.of("queryParams", params)
-//
-//        );
-//        resp.setContentType("text/html");
-//        engine.process("index", simpleContext, resp.getWriter());
-//        resp.getWriter().close();
-//    }
-
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         commandService.process(req,resp,engine);

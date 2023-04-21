@@ -29,6 +29,15 @@ public class HibernateLinkService implements LinkService{
     }
 
     @Override
+    public void update(Link link) {
+        try (Session session = openSession()) {
+            Transaction transaction = session.beginTransaction();
+            session.merge(link);
+            transaction.commit();
+        }
+    }
+
+    @Override
     public void deleteByShortLink(String shortLink) {
         try (Session session = openSession()) {
             Transaction transaction = session.beginTransaction();

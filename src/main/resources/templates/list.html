@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, user-scalable=no initial-scale=1.0">
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <meta http-equiv="refresh" content="300">
+<!--  <meta http-equiv="refresh" content="300">-->
   <title>List</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 
@@ -12,7 +12,18 @@
 <body>
 <div class="container mt-3">
   <div class="card">
-    <div class="card-header" th:text="'Links:  ' + ${links.size()}"></div>
+    <div class="card-header" >
+      <span th:text="'Links:  ' + ${links.size()}"></span>
+      <a href="/link/create" class="btn btn-outline-primary">Create link</a>
+
+      <form action="/list" method="GET">
+        <div class="input-group mb-3 mt-3">
+          <input th:value="${query}" type="text" class="form-control form-control-sm" name="query">
+          <button class="btn btn-sm btn-outline-secondary" type="submit">Search</button>
+        </div>
+      </form>
+
+    </div>
     <div class="card-body">
       <table class="table">
         <tr>
@@ -21,15 +32,25 @@
           <th>Open count</th>
         </tr>
         <tr th:each="link: ${links}">
-          <td th:text="${link.shortLink}"></td>
+          <td >
+            <a th:text="${link.shortLink}"
+               th:href="'/' + ${link.shortLink}"
+               target="_blank"></a>
+          </td>
           <td th:text="${link.link}"></td>
-          <td th:text="${link.openCount}"></td>
+          <td >
+            <span th:text="${link.openCount}"></span>
+            <a th:href="'/link/delete?shortLink=' + ${link.shortLink}"
+               class="btn btn-outline-danger">Delete</a>
+          </td>
         </tr>
       </table>
-      <p>Contents</p>
+<!--      <p>Contents</p>-->
     </div>
     <div class="card-footer">
-      <button type="button" class="btn btn-outline-primary">Press me</button>
+
+
+      <!--      <button type="button" class="btn btn-outline-primary">Press me</button>-->
       <!--               <button class="btn btn-primary">Press me</button>-->
     </div>
   </div>
